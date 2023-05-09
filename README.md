@@ -40,6 +40,12 @@ O repositório é composto por 3 módulos principais presentes na pasta <strong>
     O módulo exporta as seguintes funções:
     <ul>
     <li><strong>g(model, x)</strong></li>
-    Toma como parâmetros um modelo do tipo <code>PLAModel</code> e um vetor x e retonar a previsão de classe do vetor x ($sign (w^Tx + b)$)
+    Toma como parâmetros um modelo do tipo <code>PLAModel</code> e um vetor x e retonar a previsão de classe do vetor x (sign(w'x + b)).
+    <li><strong>fit!(model, X, y)</strong></li>
+    Toma como parâmetros um modelo do tipo <code>PLAModel</code> uma matrix de dados de treino X e um vetor de variáveis objetivo Y. Estima os melhores parâmetros para <code>model.w</code> e <code>model.b</code>, de acordo com o processo de otimização apresentado em aula.
+    <li><strong>error_measure(model, X_test, y_test)</strong></li>
+    Toma como parâmetros um modelo do tipo <code>PLAModel</code> uma matrix de dados de teste X_test e um vetor de variáveis objetivo y_test e retorna a acurácia do modelo estimado.
     </ul>
+    <li><h3>Lista1.jl</h3></li>
+    Módulo onde está definida a função <code>run_experiment(n)</code> que gera um conjuntos de dados, estima os parâmetos do modelo <strong>PLA</strong> e calcula a acurácia <code>n</code> vezes.
 </ul>
