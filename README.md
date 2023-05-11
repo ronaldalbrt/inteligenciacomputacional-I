@@ -48,5 +48,5 @@ O repositório é composto por 3 módulos principais presentes na pasta <strong>
     </ul>
     <li><h3>Lista1.jl</h3></li>
     Módulo onde está definida a função <code>run_experiment(n)</code> que gera um conjuntos de dados, estima os parâmetos do modelo <strong>PLA</strong> e calcula a acurácia <code>n</code> vezes.</br>
-    E a função <code>plot_data(n)</code> que gera um conjunto de dados, estima os parâmetros do modelo e combina todas essas informações em um gráfico com auxílio da biblioteca Plots.jl do Julia.
+    E a função <code>plot_data(n)</code> que gera um conjunto de dados, estima os parâmetros do modelo e combina todas essas informações em um gráfico com auxílio da biblioteca <strong>Plots.jl</strong> do Julia.
 </ul>
