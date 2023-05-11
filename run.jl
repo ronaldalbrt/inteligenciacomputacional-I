@@ -6,7 +6,6 @@ import Lista1
 
 using Statistics
 
-
 n_iterations_10 = []
 n_error_10 = []
 
@@ -21,6 +20,11 @@ for i in 1:1000
     push!(n_iterations_100, iterations_100)
     push!(n_error_100, err_100)
 end
+
+#--------------------------------------------------------------
+# Gerando Gráfico
+#--------------------------------------------------------------
+Lista1.plot_data()
 
 #---------------------------------------------------------------
 # Questão 7
