@@ -26,8 +26,11 @@ module LinearRegression
     # Função que realiza o treinamento do modelo
     function fit!(model::LinearRegressionModel, X::Vector{T}, y::Array{Int64,1}) where {T}
         X_with_intercept = hcat([vcat(x, 1) for x in X]...)'
+        
+        # Calculando a pseudo-inversa da matriz X
         pseudo_inverse = inv(X_with_intercept' * X_with_intercept) * X_with_intercept'
         
+        # Calculando os parâmetros do modelo
         w_vector = pseudo_inverse * y
         model.w = w_vector[1:end-1]
         model.b = w_vector[end]
