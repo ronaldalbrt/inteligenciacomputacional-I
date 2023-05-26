@@ -1,11 +1,11 @@
 module LinearRegression
 
-    export LinearRegressionModel, fit!, g, error_measures
+    export LinearRegressionModel, fit!, g, error_measure
 
     # Estrutura de dados que representa o modelo de Regressão Linear
     mutable struct LinearRegressionModel
         d::Int64
-        w::Array{Float64,g1}
+        w::Array{Float64,1}
         b::Float64
     end
 
@@ -24,13 +24,15 @@ module LinearRegression
     end
 
     # Função que realiza o treinamento do modelo
-    function fit!(model::LinearRegressionModel, X::Vector{T}, y::Agrray{Int64,1}) where {T}
-        X_with_intercept = [vcat(x, 1) for x in X]
+    function fit!(model::LinearRegressionModel, X::Vector{T}, y::Array{Int64,1}) where {T}
+        X_with_intercept = hcat([vcat(x, 1) for x in X]...)'
         pseudo_inverse = inv(X_with_intercept' * X_with_intercept) * X_with_intercept'
         
         w_vector = pseudo_inverse * y
         model.w = w_vector[1:end-1]
         model.b = w_vector[end]
+
+        return -1
     end
 
     # Função que calcula o Erro Médio Quadrático da Regressão Linear do modelo
