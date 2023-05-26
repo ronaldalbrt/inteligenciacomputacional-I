@@ -67,7 +67,7 @@ println("Erro médio:  ", mean(n_error_non_linear_function))
 #---------------------------------------------------------------
 println("------------------ Questão 9 ------------------")
 println("Coeficientes w:  ", mean(n_w_non_linear_function), 
-    "\n Coeficiente b: ", mean(n_b_non_linear_function))
+    "\nCoeficiente b: ", mean(n_b_non_linear_function))
 
 #---------------------------------------------------------------
 # Questão 10
