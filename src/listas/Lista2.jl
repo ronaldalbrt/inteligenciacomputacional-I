@@ -50,8 +50,8 @@ module Lista2
     end
 
     # Experimento da questão 11
-    function run_experiment_4(n_1::Int64=100, n_2::Int64=100)
-        dataset_train = Dataset(n_1; noisy=true)
+    function run_experiment_4(n_1::Int64=100, n_2::Int64=1000)
+        dataset = Dataset(n_1; noisy=true, test_size=n_2)
         # Modelo PLA com k = 10
         model_10 = PLAModel(2)
         # Modelo PLA com k = 50
@@ -59,23 +59,21 @@ module Lista2
 
         # Modelo de regressão linear
         model_linear_regression = LinearRegressionModel(2)
-        LinearRegression.fit!(model_linear_regression, dataset_train.X, dataset_train.y)
+        LinearRegression.fit!(model_linear_regression, dataset.X, dataset.y)
 
         # Modelo de PLA com inicialização dos parâmetros com os parâmetros do modelo de regressão linear
         model_10_linear_regression = PLAModel(2, model_linear_regression.w, model_linear_regression.b)
         model_50_linear_regression = PLAModel(2, model_linear_regression.w, model_linear_regression.b)
 
         # Treinamento dos modelos com pocket PLA
-        PLA.pocket_fit!(model_10, dataset_train.X, dataset_train.y, 10)
-        PLA.pocket_fit!(model_50, dataset_train.X, dataset_train.y, 50)
-        PLA.pocket_fit!(model_10_linear_regression, dataset_train.X, dataset_train.y, 10)
-        PLA.pocket_fit!(model_50_linear_regression, dataset_train.X, dataset_train.y, 50)
-
-        # Dataset de teste
-        dataset_test = Dataset(n_2; noisy=true)
-        return PLA.error_measure(model_10, dataset_test.X, dataset_test.y), 
-        PLA.error_measure(model_50, dataset_test.X, dataset_test.y),
-        PLA.error_measure(model_10_linear_regression, dataset_test.X, dataset_test.y), 
-        PLA.error_measure(model_50_linear_regression, dataset_test.X, dataset_test.y)
+        PLA.pocket_fit!(model_10, dataset.X, dataset.y, 10)
+        PLA.pocket_fit!(model_50, dataset.X, dataset.y, 50)
+        PLA.pocket_fit!(model_10_linear_regression, dataset.X, dataset.y, 10)
+        PLA.pocket_fit!(model_50_linear_regression, dataset.X, dataset.y, 50)
+        
+        return PLA.error_measure(model_10, dataset.X_test, dataset.y_test), 
+        PLA.error_measure(model_50, dataset.X_test, dataset.y_test),
+        PLA.error_measure(model_10_linear_regression, dataset.X_test, dataset.y_test), 
+        PLA.error_measure(model_50_linear_regression, dataset.X_test, dataset.y_test)
     end
 end

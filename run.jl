@@ -29,14 +29,18 @@ n_error_k_50 = []
 n_error_k_10_lin_regression = []
 n_error_k_50_lin_regression = []
 for i in 1:1000
+    # Questões 5 e 6
     error_in_sample, error_out_of_sample = Lista2.run_experiment_1()
 
+    # Questão 7
     steps_until_convergence = Lista2.run_experiment_2()
 
+    # Questões 8, 9 e 10
     error_non_linear_function, 
     w_non_linear_function, b_non_linear_function,
     error_non_linear_out_of_sample = Lista2.run_experiment_3()
 
+    # Questão 11
     error_k_10, error_k_50, 
     error_k_10_lin_regression, 
     error_k_50_lin_regression = Lista2.run_experiment_4()

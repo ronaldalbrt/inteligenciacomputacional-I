@@ -27,7 +27,7 @@ module Data
         return x -> sign(w' * x + b), w, b
     end
 
-    function Dataset(n::Int64=1000; target_function=nothing, noisy=false) 
+    function Dataset(n::Int64=1000; target_function=nothing, noisy=false, test_size=nothing) 
         if target_function === nothing
              # Gerando função objetivo
             target_function, w, b = generate_target_function()
@@ -36,20 +36,24 @@ module Data
             b = nothing
         end
 
+        # Definindo tamanho do conjunto de teste
+        test_size = test_size === nothing ? n : test_size
+
         # Gerando pontos aleatórios
         X = [rand(Uniform(-1, 1), 2) for i in 1:n]
         y = target_function.(X)
 
         # Gerando pontos de teste
-        X_test = [rand(Uniform(-1, 1), 2) for i in 1:n]
+        X_test = [rand(Uniform(-1, 1), 2) for i in 1:test_size]
         y_test = target_function.(X_test)
 
         # Adicionando ruído
         if noisy
             noisy_idx = sample(1:n, Int64(round(n * 0.1)), replace=false)
+            noisy_idx_test = sample(1:test_size, Int64(round(test_size * 0.1)), replace=false)
 
             y[noisy_idx] = -y[noisy_idx]
-            y_test[noisy_idx] = -y_test[noisy_idx]
+            y_test[noisy_idx_test] = -y_test[noisy_idx_test]
         end
 
         return Dataset(n, X, y, X_test, y_test, target_function, w, b)
