@@ -55,7 +55,7 @@ end
 
 # Definição da Limitante Devroye
 function devroye(N, epsilon)
-    sqrt(1/(2*N) * (4*epsilon*(1 + epsilon) + 2 * (log(2) * d_vc*log(N) - log(sqrt(delta)))))
+    sqrt((1/(2*N))*(4*epsilon*(1+epsilon) + (log(4)+2*d_vc*log(N)-log(delta))))
 end
 
 # Definição das funções de limitantes
